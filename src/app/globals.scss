@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--sidebar-width: 15rem;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+
+	@apply text-white bg-bg text-lg;
+}

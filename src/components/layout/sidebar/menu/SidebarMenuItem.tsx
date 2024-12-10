@@ -5,16 +5,21 @@ import type { ISidebarItem } from '../sidebar.types'
 
 interface Props {
 	item: ISidebarItem
+	isActive: boolean
 }
 
-const SidebarMenuItem = ({ item }: Props) => {
+const SidebarMenuItem = ({ item, isActive }: Props) => {
 	return (
 		<li>
 			<Link
 				href={item.link}
 				className={cn('group py-3 flex items-center gap-5 ')}
 			>
-				<item.icon className='group-hover:text-primary transition group-hover:rotate-6 min-w-6' />
+				<item.icon
+					className={cn('group-hover:text-primary transition group-hover:rotate-6 min-w-6', {
+						'text-primary ': isActive
+					})}
+				/>
 
 				<span>{item.label}</span>
 			</Link>

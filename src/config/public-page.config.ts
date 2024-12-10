@@ -12,6 +12,16 @@ class PublicPage {
 
 	SETTINGS = '/settings'
 	FEEDBACK = '/feedback'
+
+	video(path: string) {
+		return `/v/${path}`
+	}
+
+	channel(path: string) {
+		return `/c/${path}`
+	}
+
+	VIDEO = '/v'
 }
 
-export const PUBLIC_PAGE = new PublicPage()
+export const PAGE = new PublicPage()

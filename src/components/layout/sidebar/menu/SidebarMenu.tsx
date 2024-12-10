@@ -1,3 +1,6 @@
+import { usePathname } from 'next/navigation'
+import { match } from 'path-to-regexp'
+
 import type { ISidebarItem } from '../sidebar.types'
 
 import SidebarMenuItem from './SidebarMenuItem'
@@ -8,6 +11,8 @@ interface SidebarItemProps {
 }
 
 const SidebarMenu = ({ items, title }: SidebarItemProps) => {
+	const getPathName = usePathname()
+
 	return (
 		<nav>
 			{title && <div className='opacity-45 uppercase text-xs font-medium mb-3'>{title}</div>}
@@ -17,6 +22,7 @@ const SidebarMenu = ({ items, title }: SidebarItemProps) => {
 					<SidebarMenuItem
 						key={menuItem.label}
 						item={menuItem}
+						isActive={!!match(menuItem.link)(getPathName)}
 					/>
 				))}
 			</ul>

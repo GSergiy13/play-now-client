@@ -20,7 +20,7 @@ const VideoItem = ({ video, Icon }: Props) => {
 			<div className='relative mb-1.5'>
 				<Link href={PAGE.video(video.publicId)}>
 					<Image
-						className='cursor-pointer rounded-md'
+						className='cursor-pointer rounded-md w-full object-cover'
 						src={video.thumbnailUrl}
 						width={250}
 						height={140}

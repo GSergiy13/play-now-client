@@ -18,7 +18,7 @@ export default function Home() {
 	})
 
 	return (
-		<div className='grid grid-cols-5 gap-6'>
+		<div className='grid grid-cols-4 gap-4'>
 			{isLoading
 				? 'Loading...'
 				: data?.length &&

@@ -19,6 +19,7 @@ const Layout = ({ children }: PropsWithChildren<unknown>) => {
 		<main
 			className={cn(
 				'flex min-h-screen',
+				styles.initialSidebar,
 				isShowedsidebar ? styles.showedSidebar : styles.hidedSidebar
 			)}
 		>

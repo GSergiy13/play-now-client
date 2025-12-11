@@ -35,10 +35,15 @@ export default async function Home() {
 	return (
 		<section>
 			<section className='mb-6'>
-				<Heading Icon={Flame}>Trending Videos</Heading>
+				<Heading
+					isH1
+					Icon={Flame}
+				>
+					Trending Videos
+				</Heading>
 
 				<div className='grid grid-cols-4 gap-4'>
-					{getTradingVideos.length &&
+					{!!getTradingVideos.length &&
 						getTradingVideos.map(video => (
 							<VideoItem
 								key={video.id}

@@ -3,14 +3,11 @@ class PublicPage {
 	TRENDING = '/trending'
 	VIDEO_GAME = '/video-games'
 
-	SEARCH = '/search'
-
 	MY_CHANNEL = '/my-channel'
 	SUBSCRIPTION = '/subscriptions'
 	HISTORY = '/history'
 	LIKED_VIDEOS = '/liked-videos'
 
-	SETTINGS = '/settings'
 	FEEDBACK = '/feedback'
 
 	video(path: string) {
@@ -22,6 +19,10 @@ class PublicPage {
 	}
 
 	VIDEO = '/v'
+
+	SEARCH(searchTerm: string) {
+		return `/s?q=${searchTerm}`
+	}
 }
 
 export const PAGE = new PublicPage()

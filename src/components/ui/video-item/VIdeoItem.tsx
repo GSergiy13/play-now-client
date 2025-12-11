@@ -16,11 +16,11 @@ interface Props {
 
 const VideoItem = ({ video, Icon }: Props) => {
 	return (
-		<div>
+		<div className=''>
 			<div className='relative mb-1.5'>
 				<Link href={PAGE.video(video.publicId)}>
 					<Image
-						className='cursor-pointer rounded-md w-full object-cover'
+						className='cursor-pointer rounded-md w-full object-cover hover:opacity-70 transition'
 						src={video.thumbnailUrl}
 						width={250}
 						height={140}
@@ -71,12 +71,15 @@ const VideoItem = ({ video, Icon }: Props) => {
 					href={PAGE.channel(video.channel.slug)}
 				>
 					<span className='text-gray-400 text-sm'>{video.channel.slug}</span>
-					<span>
-						<BadgeCheck
-							className='text-green-500'
-							size={18}
-						/>
-					</span>
+
+					{video.channel.isVerified && (
+						<span>
+							<BadgeCheck
+								className='text-green-500'
+								size={15}
+							/>
+						</span>
+					)}
 				</Link>
 			</div>
 		</div>

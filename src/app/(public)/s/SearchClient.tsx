@@ -1,7 +1,8 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { Compass, Flame } from 'lucide-react'
+import { Flame, Search } from 'lucide-react'
+import { useSearchParams } from 'next/navigation'
 
 import { Heading } from '@/ui/heading/Heading'
 import { SkeletonLoader } from '@/ui/skeleton/skeletonLoader'
@@ -9,16 +10,24 @@ import VideoItem from '@/ui/video-item/VIdeoItem'
 
 import { videoService } from '@/services/video.service'
 
-export default function Explore() {
-	const { data, isLoading } = useQuery({
-		queryKey: ['explore'],
+export default function SearchClient() {
+	const searchParams = useSearchParams()
 
-		queryFn: () => videoService.getExploreVideos()
+	const { data, isLoading } = useQuery({
+		queryKey: ['search', searchParams.get('q')],
+
+		queryFn: () => videoService.getAllVideos(searchParams.get('q'))
 	})
 
 	return (
 		<section className='min-h-[40vh]'>
-			<Heading Icon={Compass}>Explore Videos</Heading>
+			<Heading
+				isH1
+				Icon={Search}
+			>
+				{' '}
+				Search by: {searchParams.get('q')}
+			</Heading>
 
 			<div className='grid grid-cols-4 gap-4'>
 				{isLoading ? (
@@ -26,8 +35,7 @@ export default function Explore() {
 						count={4}
 						className='h-48 w-full'
 					/>
-				) : (
-					!!data?.length &&
+				) : data?.length ? (
 					data.map(video => (
 						<VideoItem
 							key={video.id}
@@ -35,6 +43,8 @@ export default function Explore() {
 							Icon={Flame}
 						/>
 					))
+				) : (
+					<p className='text-gray-400'>No videos found for "{searchParams.get('q')}"</p>
 				)}
 			</div>
 		</section>

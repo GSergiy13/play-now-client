@@ -11,3 +11,9 @@ body {
 
 	@apply text-white bg-bg text-lg;
 }
+
+@layer utilities {
+	.grid_4_cols {
+		@apply grid grid-cols-4 gap-4;
+	}
+}

@@ -10,10 +10,12 @@ import { PAGE } from '@/config/public-page.config'
 
 import type { IAuthData, IAuthForm } from './auth-form.types'
 import { authService } from '@/services/auth.service'
+import { useAppDispatch } from '@/store'
 
 export function useAuthForm(type: 'login' | 'register', reset: UseFormReset<IAuthData>) {
 	const router = useRouter()
 	const [isPending, startTransition] = useTransition()
+	const dispatch = useAppDispatch()
 
 	const recaptchaRef = useRef<ReCAPTCHA>(null)
 
@@ -26,7 +28,7 @@ export function useAuthForm(type: 'login' | 'register', reset: UseFormReset<IAut
 		mutationFn: (data: IAuthData) => authService.main(type, data, recaptchaRef.current?.getValue())
 	})
 
-	const onSubmitHandler: SubmitHandler<IAuthForm> = data => {
+	const onSubmitHandler: SubmitHandler<IAuthForm> = ({ email, password }) => {
 		const token = recaptchaRef.current?.getValue()
 
 		if (!token) {
@@ -36,7 +38,7 @@ export function useAuthForm(type: 'login' | 'register', reset: UseFormReset<IAut
 			return
 		}
 
-		toast.promise(mutateAsync(data), {
+		toast.promise(mutateAsync({ email, password }), {
 			loading: 'Processing...',
 			success: () => {
 				startTransition(() => {
@@ -52,8 +54,6 @@ export function useAuthForm(type: 'login' | 'register', reset: UseFormReset<IAut
 				}
 			}
 		})
-
-		// mutate(data)
 	}
 
 	const isLoading = isPending || isAuthPending

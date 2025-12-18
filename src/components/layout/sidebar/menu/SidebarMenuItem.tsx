@@ -17,7 +17,7 @@ const SidebarMenuItem = ({ item, isActive }: Props) => {
 			>
 				<item.icon
 					className={cn('group-hover:text-primary transition group-hover:rotate-6 min-w-6', {
-						'text-primary ': isActive
+						'text-red-400 ': isActive
 					})}
 				/>
 

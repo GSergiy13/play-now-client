@@ -1,4 +1,4 @@
-import type { IUser } from './auth.types'
+import type { IUser } from './user.types'
 import type { IVideo } from './video.types'
 
 export interface IWatchHistory {

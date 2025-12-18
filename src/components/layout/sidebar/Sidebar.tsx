@@ -1,7 +1,11 @@
+import dynamic from 'next/dynamic'
+
 import SidebarHeader from './header/SidebarHeader'
 import SidebarMenu from './menu/SidebarMenu'
 import SidebarSub from './menu/subscriptions/SidebarSub'
 import { MORE_SIDEBAR_DATA, SIDEBAR_DATA } from './sidebar.data'
+
+const DynamicLogout = dynamic(() => import('./Logout').then(mod => mod.Logout), { ssr: false })
 
 const Sidebar = ({ toggleSIdebar }: { toggleSIdebar: () => void }) => {
 	return (
@@ -15,6 +19,7 @@ const Sidebar = ({ toggleSIdebar }: { toggleSIdebar: () => void }) => {
 					title='More form MultiMedia'
 					items={MORE_SIDEBAR_DATA}
 				/>
+				<DynamicLogout />
 			</div>
 		</aside>
 	)

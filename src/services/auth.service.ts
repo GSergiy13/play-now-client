@@ -1,13 +1,12 @@
 import Cookies from 'js-cookie'
 
+import { clearAuthData, setAuthData } from '@/store/slice/auth.slice'
+
 import { axiosClassic } from '@/app/api/axios'
 import type { IAuthData } from '@/app/auth/auth-form.types'
-import type { IUser } from '@/types/auth.types'
-
-export enum EnumTokens {
-	'ACCESS_TOKEN' = 'accessToken',
-	'REFRESH_TOKEN' = 'refreshToken'
-}
+import { store } from '@/store'
+import { EnumTokens } from '@/types/auth.types'
+import type { IUser } from '@/types/user.types'
 
 interface IAuthResponse {
 	user: IUser
@@ -19,6 +18,8 @@ class AuthService {
 	private readonly _AUTH = '/auth'
 
 	async main(type: 'login' | 'register', data: IAuthData, recaptchaToken?: string | null) {
+		console.log('AuthService.main called with type:', type, 'and data:', data)
+
 		const response = await axiosClassic.post<IAuthResponse>(`${this._AUTH}/${type}`, data, {
 			headers: {
 				recaptcha: recaptchaToken
@@ -27,6 +28,7 @@ class AuthService {
 
 		if (response.data.accessToken) {
 			this._saveTokenStorage(response.data.accessToken)
+			store.dispatch(setAuthData(response.data))
 		}
 
 		return response
@@ -65,7 +67,10 @@ class AuthService {
 	async logout() {
 		const response = await axiosClassic.post<boolean>(`${this._AUTH}/logout`)
 
-		if (response.data) this._removeTokenStorage()
+		if (response.data) {
+			this._removeTokenStorage()
+			store.dispatch(clearAuthData())
+		}
 
 		return response
 	}

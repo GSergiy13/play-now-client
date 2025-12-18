@@ -37,13 +37,14 @@ const VideoItem = ({ video, Icon }: Props) => {
 				</Link>
 
 				<Link
-					className=' absolute left-1.5 bottom-2'
+					className='absolute left-1.5 bottom-2'
 					href={PAGE.channel(video.channel.slug)}
 				>
 					<Image
 						src={video.channel.avatarUrl}
 						width={35}
 						height={35}
+						className='rounded-full'
 						alt={video.channel.slug}
 					/>
 				</Link>

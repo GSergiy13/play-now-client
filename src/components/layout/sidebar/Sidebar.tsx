@@ -7,11 +7,11 @@ import { MORE_SIDEBAR_DATA, SIDEBAR_DATA } from './sidebar.data'
 
 const DynamicLogout = dynamic(() => import('./Logout').then(mod => mod.Logout), { ssr: false })
 
-const Sidebar = ({ toggleSIdebar }: { toggleSIdebar: () => void }) => {
+const Sidebar = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
 	return (
 		<aside className='relative p-layout border-r border-border whitespace-nowrap '>
 			<div className=' sticky top-5 overflow-hidden'>
-				<SidebarHeader toggleSIdebar={toggleSIdebar} />
+				<SidebarHeader toggleSidebar={toggleSidebar} />
 
 				<SidebarMenu items={SIDEBAR_DATA} />
 				<SidebarSub />

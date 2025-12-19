@@ -1,29 +1,34 @@
 'use client'
 
 import cn from 'clsx'
-import { type PropsWithChildren, useState } from 'react'
+import { type PropsWithChildren, useEffect, useState } from 'react'
 
 import Content from './content/Content'
 import Sidebar from './sidebar/Sidebar'
+import { authService } from '@/services/auth.service'
 
 import styles from './Layout.module.scss'
 
 const Layout = ({ children }: PropsWithChildren<unknown>) => {
-	const [isShowedsidebar, setIsSHowedSidebar] = useState(true)
+	const [isShowSidebar, setIsSShowSidebar] = useState(true)
 
-	const toggleSIdebar = () => {
-		setIsSHowedSidebar(!isShowedsidebar)
+	const toggleSidebar = () => {
+		setIsSShowSidebar(!isShowSidebar)
 	}
+
+	useEffect(() => {
+		authService.initializeAuth()
+	}, [])
 
 	return (
 		<main
 			className={cn(
 				'flex min-h-screen',
 				styles.initialSidebar,
-				isShowedsidebar ? styles.showedSidebar : styles.hidedSidebar
+				isShowSidebar ? styles.showedSidebar : styles.hidedSidebar
 			)}
 		>
-			<Sidebar toggleSIdebar={toggleSIdebar} />
+			<Sidebar toggleSidebar={toggleSidebar} />
 			<Content>{children}</Content>
 		</main>
 	)

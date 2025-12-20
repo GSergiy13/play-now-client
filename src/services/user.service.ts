@@ -1,4 +1,5 @@
 import { instance } from '@/app/api/axios'
+import type { ISettingData } from '@/app/studio/settings/setting.type'
 import type { IFullUser } from '@/types/user.types'
 
 class UserService {
@@ -6,6 +7,10 @@ class UserService {
 
 	getProfile() {
 		return instance.get<IFullUser>(`${this._URL}/profile`)
+	}
+
+	UpdateProfile(data: ISettingData) {
+		return instance.put<boolean>(`${this._URL}/profile`, data)
 	}
 }
 

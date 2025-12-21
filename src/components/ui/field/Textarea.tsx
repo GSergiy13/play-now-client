@@ -2,24 +2,25 @@ import cn from 'clsx'
 import type { InputHTMLAttributes } from 'react'
 import type { UseFormRegisterReturn } from 'react-hook-form'
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends InputHTMLAttributes<HTMLTextAreaElement> {
 	label: string
 	error?: string
 	registration: UseFormRegisterReturn
 }
 
-export const Field = ({ label, error, registration, ...rest }: Props) => {
+export const Textarea = ({ label, error, registration, ...rest }: Props) => {
 	return (
 		<div className='mb-4'>
 			<label>
 				<span className='block text-gray-300 font-semibold mb-2'>{label}</span>
-				<input
+				<textarea
 					className={cn(
-						'w-full px-4 py-2 border border-border bg-transparent shadow-sm rounded focus:outline-none focus:ring-0 text-white transition-colors focus:border-gray-300',
+						'w-full px-4 py-2 border border-border bg-transparent shadow-sm rounded focus:outline-none focus:ring-0 text-white transition-colors focus:border-gray-300 resize-none ',
 						error ? 'border-red-500' : 'border-border'
 					)}
 					{...registration}
 					{...rest}
+					rows={4}
 				/>
 			</label>
 

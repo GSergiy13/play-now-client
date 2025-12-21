@@ -1,5 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
+
+import { useProfile } from '@/hooks/useProfile'
 
 import type { ISettingData } from './setting.type'
 import { userService } from '@/services/user.service'
@@ -8,6 +11,14 @@ export function useSetting() {
 	const form = useForm<ISettingData>({
 		mode: 'onChange'
 	})
+
+	const { profile, isSuccess } = useProfile()
+
+	useEffect(() => {
+		if (!isSuccess) return
+
+		form.reset(profile)
+	}, [profile, isSuccess, form])
 
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['update-setting'],
@@ -18,5 +29,5 @@ export function useSetting() {
 		mutate(data)
 	}
 
-	return { form, isLoading: isPending, onSubmitHandler }
+	return { formObject: form, isLoading: isPending, onSubmitHandler }
 }

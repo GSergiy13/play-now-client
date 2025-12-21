@@ -3,14 +3,22 @@
 import { useMutation } from '@tanstack/react-query'
 import cn from 'clsx'
 import { LogOut } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+
+import { PAGE } from '@/config/public-page.config'
 
 import { authService } from '@/services/auth.service'
 import { useTypedSelector } from '@/store'
 
 export function Logout() {
+	const route = useRouter()
+
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['logout'],
-		mutationFn: () => authService.logout()
+		mutationFn: () => authService.logout(),
+		onSuccess: () => {
+			route.replace(PAGE.HOME)
+		}
 	})
 
 	const { isLoggedIn } = useTypedSelector(state => state.auth)

@@ -1,8 +1,11 @@
 'use client'
 
+import { Controller } from 'react-hook-form'
+
 import { Button } from '@/ui/button/Button'
 import { Field } from '@/ui/field/Field'
 import { Textarea } from '@/ui/field/Textarea'
+import { UploadField } from '@/ui/upload-field/UploadField'
 
 import { useSetting } from './useSetting'
 
@@ -11,7 +14,8 @@ export default function SettingForm() {
 		formObject: {
 			handleSubmit,
 			register,
-			formState: { errors }
+			formState: { errors },
+			control
 		},
 		isLoading,
 		onSubmitHandler
@@ -65,10 +69,37 @@ export default function SettingForm() {
 						/>
 					</div>
 
-					<div>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae consequuntur reiciendis
-						debitis excepturi, nihil ullam accusamus animi aut eveniet doloribus veritatis laborum.
-						Nostrum esse culpa ducimus voluptatem nemo saepe recusandae.
+					<div className='flex flex-col gap-10'>
+						<div>
+							<Controller
+								name='channel.avatarUrl'
+								control={control}
+								render={({ field: { onChange, value }, fieldState: { error } }) => (
+									<UploadField
+										label='Upload Avatar'
+										onChange={onChange}
+										value={value}
+										error={error}
+									/>
+								)}
+							/>
+						</div>
+						<div>
+							<Controller
+								name='channel.bannerUrl'
+								control={control}
+								render={({ field: { onChange, value }, fieldState: { error } }) => (
+									<UploadField
+										label='Upload Banner'
+										onChange={onChange}
+										value={value}
+										error={error}
+										folder='banner'
+										aspectRatio='16:9'
+									/>
+								)}
+							/>
+						</div>
 					</div>
 				</div>
 

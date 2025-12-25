@@ -12,17 +12,33 @@ export function useSetting() {
 		mode: 'onChange'
 	})
 
-	const { profile, isSuccess } = useProfile()
+	const { profile, isSuccess, refetch } = useProfile()
 
 	useEffect(() => {
 		if (!isSuccess) return
 
-		form.reset(profile)
+		const channel = profile?.channel
+			? {
+					avatarUrl: profile?.channel?.avatarUrl,
+					bannerUrl: profile?.channel?.bannerUrl,
+					description: profile?.channel?.description,
+					slug: profile?.channel?.slug
+				}
+			: {}
+
+		form.reset({
+			channel,
+			email: profile?.email,
+			name: profile?.name
+		})
 	}, [profile, isSuccess, form])
 
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['update-setting'],
-		mutationFn: (data: ISettingData) => userService.UpdateProfile(data)
+		mutationFn: (data: ISettingData) => userService.UpdateProfile(data),
+		onSuccess: () => {
+			refetch()
+		}
 	})
 
 	const onSubmitHandler: SubmitHandler<ISettingData> = data => {

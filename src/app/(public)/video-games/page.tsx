@@ -39,7 +39,7 @@ export default async function VideoGamesPage() {
 				Games Videos
 			</Heading>
 
-			<div className='grid_4_cols'>
+			<div className='grid_5_cols'>
 				{!!videoGames.length ? (
 					videoGames.map(video => (
 						<VideoItem

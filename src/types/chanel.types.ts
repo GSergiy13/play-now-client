@@ -1,3 +1,4 @@
+import type { IUser } from './user.types'
 import type { IVideo } from './video.types'
 
 export interface IChannel {
@@ -9,6 +10,7 @@ export interface IChannel {
 	avatarUrl: string
 	bannerUrl: string
 	videos: IVideo[]
-	subscribers: []
+	user: IUser
+	subscribers: IUser[]
 	createdAt: string
 }

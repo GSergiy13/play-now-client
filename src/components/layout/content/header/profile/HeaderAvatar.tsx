@@ -12,8 +12,6 @@ export function HeaderAvatar() {
 
 	if (isLoading) return <SkeletonLoader className='w-10 rounded-lg ' />
 
-	console.log('profile', profile)
-
 	return (
 		<Link
 			href={STUDIO_PAGE.SETTINGS}

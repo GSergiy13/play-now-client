@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
 	const data = await videoService.getTrendingVideos()
-	const getTradingVideos = data.data.slice(0, 4)
+	const getTradingVideos = data.data.slice(0, 5)
 
 	return (
 		<section>
@@ -43,7 +43,7 @@ export default async function Home() {
 						Trending Videos
 					</Heading>
 
-					<div className='grid_4_cols'>
+					<div className='grid_5_cols'>
 						{getTradingVideos.map(video => (
 							<VideoItem
 								key={video.id}

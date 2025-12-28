@@ -1,14 +1,11 @@
+'use client'
+
 import cn from 'clsx'
 import Link from 'next/link'
 
-import type { ISidebarItem } from '../sidebar.types'
+import type { MenuItemProps } from './munu.type'
 
-interface Props {
-	item: ISidebarItem
-	isActive: boolean
-}
-
-const SidebarMenuItem = ({ item, isActive }: Props) => {
+const SidebarMenuItem = ({ item, isActive }: MenuItemProps) => {
 	return (
 		<li>
 			<Link

@@ -10,7 +10,7 @@ import VideoItem from '@/ui/video-item/VIdeoItem'
 
 import { videoService } from '@/services/video.service'
 
-export default function SearchClient() {
+export function SearchClient() {
 	const searchParams = useSearchParams()
 
 	const { data, isLoading } = useQuery({

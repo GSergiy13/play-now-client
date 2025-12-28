@@ -33,6 +33,7 @@ const VideoItem = ({ video, Icon }: Props) => {
 						width={250}
 						height={140}
 						alt={video.title}
+						quality={100}
 					/>
 				</Link>
 

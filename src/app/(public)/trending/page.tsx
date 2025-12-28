@@ -39,7 +39,7 @@ export default async function TrendingPage() {
 				Trending Videos
 			</Heading>
 
-			<div className='grid_4_cols'>
+			<div className='grid_5_cols'>
 				{!!trendingVideos.data.length ? (
 					trendingVideos.data.map(video => (
 						<VideoItem

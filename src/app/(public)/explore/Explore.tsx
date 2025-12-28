@@ -20,7 +20,7 @@ export default function Explore() {
 		<section className='min-h-[40vh]'>
 			<Heading Icon={Compass}>Explore Videos</Heading>
 
-			<div className='grid_4_cols'>
+			<div className='grid_5_cols'>
 				{isLoading ? (
 					<SkeletonLoader
 						count={4}

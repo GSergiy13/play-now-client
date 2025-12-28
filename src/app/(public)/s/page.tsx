@@ -1,14 +1,24 @@
-import type { Metadata } from 'next'
+'use client'
 
-import { NO_INDEX_PAGE } from '@/constants/seo.constants'
+import { Suspense } from 'react'
 
-import SearchClient from './SearchClient'
+import { SkeletonLoader } from '@/ui/skeleton/skeletonLoader'
 
-export const metadata: Metadata = {
-	title: 'Search',
-	...NO_INDEX_PAGE
-}
+import { SearchClient } from './SearchClient'
 
-export default function Page() {
-	return <SearchClient />
+export default function SPage() {
+	return (
+		<Suspense
+			fallback={
+				<div className='grid grid-cols-6 gap-6'>
+					<SkeletonLoader
+						count={3}
+						className='h-36 rounded-md'
+					/>
+				</div>
+			}
+		>
+			<SearchClient />
+		</Suspense>
+	)
 }

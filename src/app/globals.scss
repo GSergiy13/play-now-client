@@ -13,8 +13,8 @@ body {
 }
 
 @layer utilities {
-	.grid_4_cols {
-		@apply grid grid-cols-4 gap-4;
+	.grid_5_cols {
+		@apply grid grid-cols-5 gap-4;
 	}
 }
 
